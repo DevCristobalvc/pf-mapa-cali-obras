@@ -22,7 +22,6 @@
         .title {
             text-align: center;
             font-size: 2.5em;
-            margin-bottom: 20px;
         }
 
         .container {
@@ -36,15 +35,25 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: hidden;
         }
 
         .map-container {
             width: 100%;
             height: 100%;
+            background-color: transparent;
+            border-radius: 10px;
+            position: relative;
+            overflow: auto;
+            cursor: grab;
+        }
+
+        .map-content {
+            width: 200%;
+            height: 200%;
             background-image: url('map.jpg');
             background-size: cover;
             background-position: center;
-            border-radius: 10px;
             position: relative;
         }
 
@@ -64,15 +73,19 @@
             transform: scale(1.1);
         }
 
-        .button1 { top: 30%; left: 40%; }
-        .button2 { top: 60%; left: 70%; }
-        .button3 { top: 50%; left: 20%; }
+        .button1 { top: 60%; left: 60%; }
+        .button2 { top: 30%; left: 35%; }
+        .button3 { top: 25%; left: 10%; }
+        .button4 { top: 60%; left: 15%; }
+        .button5 { top: 35%; left: 80%; }
+        .button6 { top: 80%; left: 25%; }
 
         .footer {
             text-align: center;
             font-size: 1em;
             padding: 10px;
-            background: rgba(0, 0, 0, 0.8);
+            background: #122019;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             border-radius: 0 0 10px 10px;
             margin-top: 20px;
             width: 80%;
@@ -83,11 +96,52 @@
     <div class="title">Prototipo Enterate Obras Cali</div>
     <div class="container">
         <div class="map-container">
-            <button class="button button1" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628129&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Enlace 1</button>
-            <button class="button button2" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628130&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Enlace 2</button>
-            <button class="button button3" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628131&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Enlace 3</button>
+            <div class="map-content">
+                <button class="button button1" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628129&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Obra 1</button>
+                <button class="button button2" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628130&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Obra 2</button>
+                <button class="button button3" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628131&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Obra 3</button>
+                <button class="button button4" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628129&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Obra 4</button>
+                <button class="button button5" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628130&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Obra 5</button>
+                <button class="button button6" onclick="window.open('https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.5628131&isFromPublicArea=True&isModal=true&asPopupView=true', '_blank')">Obra 6</button>
+            </div>
         </div>
     </div>
     <div class="footer">© 2024 Diputado Esteban Oliveros. Todos los derechos reservados.</div>
+    <script>
+        const mapContainer = document.querySelector('.map-container');
+        const mapContent = document.querySelector('.map-content');
+        let isDown = false;
+        let startX, startY, scrollLeft, scrollTop;
+
+        mapContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            mapContainer.classList.add('active');
+            startX = e.pageX - mapContainer.offsetLeft;
+            startY = e.pageY - mapContainer.offsetTop;
+            scrollLeft = mapContainer.scrollLeft;
+            scrollTop = mapContainer.scrollTop;
+        });
+
+        mapContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            mapContainer.classList.remove('active');
+        });
+
+        mapContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            mapContainer.classList.remove('active');
+        });
+
+        mapContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - mapContainer.offsetLeft;
+            const y = e.pageY - mapContainer.offsetTop;
+            const walkX = (x - startX) * 1; // Ajustar velocidad de desplazamiento
+            const walkY = (y - startY) * 1; // Ajustar velocidad de desplazamiento
+            mapContainer.scrollLeft = scrollLeft - walkX;
+            mapContainer.scrollTop = scrollTop - walkY;
+        });
+    </script>
 </body>
 </html>
