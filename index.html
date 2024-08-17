@@ -144,7 +144,7 @@
             e.preventDefault();
             const x = e.pageX - mapContainer.offsetLeft;
             const y = e.pageY - mapContainer.offsetTop;
-            const walkX = (x - startX) * 1; // Ajustar velocidad de desplazamiento
+            const walkX = (x - startX) * 1; // Ajustar velocidad de desplazamiento en el mapa
             const walkY = (y - startY) * 1; // Ajustar velocidad de desplazamiento
             mapContainer.scrollLeft = scrollLeft - walkX;
             mapContainer.scrollTop = scrollTop - walkY;
