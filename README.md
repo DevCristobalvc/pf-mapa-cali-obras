@@ -51,7 +51,8 @@ La página web presenta un prototipo con un mapa de fondo y varios botones super
 
 ## Créditos
 
-- **Desarrollado por**: Cristoba Valencia Ceron, [correo electronico](mailto:cristobalvalencia3002gmail.com).
+- **Desarrollado por**: Cristoba Valencia Ceron, [cristobalvalencia3002@gmail.com](mailto:cristobalvalencia3002gmail.com).
+- **Sitio Web**: Visita el proyecto en [devcristobalvc.netlify.app](https://devcristobalvc.netlify.app/).
 - **Copyright**: © 2024 Diputado Esteban Oliveros. Todos los derechos reservados.
 
 ## Contribuciones
